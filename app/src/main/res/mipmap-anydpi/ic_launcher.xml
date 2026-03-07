@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- 渐变圆形背景 -->
+    <path
+        android:fillColor="#A8E6CF"
+        android:pathData="M54,54m-40,0a40,40 0,1 1,80 0a40,40 0,1 1,-80 0" />
+
+    <!-- 外层渐变效果 -->
+    <path
+        android:fillColor="#7FD3D0"
+        android:pathData="M54,54m-35,0a35,35 0,1 1,70 0a35,35 0,1 1,-70 0" />
+
+    <!-- 向上箭头 -->
+    <path
+        android:fillColor="#2E5C47"
+        android:pathData="M54,35 L45,48 L50,48 L50,65 L58,65 L58,48 L63,48 Z" />
+
+    <!-- 左侧曲线（盆底肌轮廓） -->
+    <path
+        android:strokeColor="#2E5C47"
+        android:strokeWidth="2"
+        android:fillColor="#00000000"
+        android:pathData="M35,55
+                         C30,55 28,60 28,65
+                         C28,72 32,78 38,80
+                         C42,81 46,80 48,76" />
+
+    <!-- 右侧曲线（盆底肌轮廓） -->
+    <path
+        android:strokeColor="#2E5C47"
+        android:strokeWidth="2"
+        android:fillColor="#00000000"
+        android:pathData="M73,55
+                         C78,55 80,60 80,65
+                         C80,72 76,78 70,80
+                         C66,81 62,80 60,76" />
+
+    <!-- 底部装饰线条 -->
+    <path
+        android:strokeColor="#2E5C47"
+        android:strokeWidth="1.5"
+        android:fillColor="#00000000"
+        android:pathData="M42,78 C42,82 45,85 48,85" />
+
+    <path
+        android:strokeColor="#2E5C47"
+        android:strokeWidth="1.5"
+        android:fillColor="#00000000"
+        android:pathData="M66,78 C66,82 63,85 60,85" />
+</vector>

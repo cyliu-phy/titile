@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(./gradlew assembleDebug:*)",
+      "WebSearch",
+      "WebFetch(domain:guide.vico.patrykandpatrick.com)",
+      "WebFetch(domain:github.com)",
+      "Bash(./gradlew kspDebugKotlin:*)",
+      "WebFetch(domain:patrykandpatrick.com)",
+      "Bash(./gradlew compileDebugKotlin:*)",
+      "WebFetch(domain:central.sonatype.com)",
+      "WebFetch(domain:api.vico.patrykandpatrick.com)"
+    ]
+  }
+}

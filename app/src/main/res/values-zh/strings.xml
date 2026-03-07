@@ -1,0 +1,90 @@
+<resources>
+    <string name="app_name">提提乐</string>
+
+    <!-- Bottom navigation -->
+    <string name="nav_home">主页</string>
+    <string name="nav_exercise">训练</string>
+    <string name="nav_stats">统计</string>
+    <string name="nav_settings">设置</string>
+
+    <!-- Notification channel -->
+    <string name="notification_channel_name">提肛提醒</string>
+    <string name="notification_channel_desc">提醒您进行提肛训练</string>
+    <string name="notification_title">提肛提醒</string>
+    <string name="notification_body">提肛训练时间到！💪</string>
+
+    <!-- Exercise session -->
+    <string name="exercise_contract">收缩</string>
+    <string name="exercise_relax">放松</string>
+    <string name="exercise_start">开始</string>
+    <string name="exercise_idle_hint">点击开始训练</string>
+    <string name="exercise_pause">暂停</string>
+    <string name="exercise_resume">继续</string>
+    <string name="exercise_stop">停止</string>
+    <string name="exercise_complete">完成！</string>
+    <string name="exercise_stop_dialog_title">提前结束？</string>
+    <string name="exercise_stop_dialog_body">提前结束训练？已完成的进度将被保存。</string>
+    <string name="exercise_stop_dialog_confirm">结束</string>
+    <string name="exercise_stop_dialog_cancel">继续</string>
+    <string name="session_duration_fmt">训练时长：%1$d 分 %2$d 秒</string>
+    <string name="session_count_fmt">%1$d / %2$d</string>
+
+    <!-- Completion screen -->
+    <string name="completion_title">棒极了！</string>
+    <string name="completion_kegels">已完成次数</string>
+    <string name="completion_duration">训练时长</string>
+    <string name="completion_done">完成</string>
+
+    <!-- Statistics -->
+    <string name="stats_heatmap">日历热图</string>
+    <string name="stats_hourly">小时分布</string>
+    <string name="stats_weekly">本周趋势</string>
+    <string name="stats_today">今天</string>
+    <string name="stats_this_week">本周</string>
+    <string name="stats_all_time">累计</string>
+    <string name="stats_streak">连续天数 🔥</string>
+    <string name="stats_days_suffix">天</string>
+    <string name="stats_no_data">暂无数据</string>
+
+    <!-- Settings -->
+    <string name="settings_exercise">训练设置</string>
+    <string name="settings_kegels_per_minute">每分钟次数</string>
+    <string name="settings_total_kegels">每次训练总次数</string>
+    <string name="settings_interval">提醒间隔</string>
+    <string name="settings_interval_30min">每30分钟</string>
+    <string name="settings_interval_1hr">每1小时</string>
+    <string name="settings_interval_2hr">每2小时</string>
+    <string name="settings_interval_custom">自定义</string>
+    <string name="settings_interval_custom_hint">分钟数（15–480）</string>
+    <string name="settings_night_mode">夜间免打扰</string>
+    <string name="settings_night_from">开始</string>
+    <string name="settings_night_to">结束</string>
+    <string name="settings_language">语言</string>
+    <string name="settings_language_system">系统</string>
+    <string name="settings_save">保存</string>
+    <string name="settings_saved">设置已保存</string>
+    <string name="settings_error_range">数值超出范围</string>
+
+    <!-- Home screen -->
+    <string name="home_greeting_morning">早上好！</string>
+    <string name="home_greeting_afternoon">下午好！</string>
+    <string name="home_greeting_evening">晚上好！</string>
+    <string name="home_start_exercise">开始训练</string>
+    <string name="home_today_count">今日次数</string>
+    <string name="home_next_reminder">下次提醒</string>
+    <string name="home_no_reminder">未设置提醒</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_skip">跳过</string>
+    <string name="onboarding_get_started">开始使用</string>
+    <string name="onboarding_page1_title">智能提醒</string>
+    <string name="onboarding_page1_body">设置提醒间隔，全天提醒您训练，夜间自动静音。</string>
+    <string name="onboarding_page2_title">引导训练</string>
+    <string name="onboarding_page2_body">跟随动画呼吸引导，完美掌握训练节奏。</string>
+    <string name="onboarding_page3_title">追踪进度</string>
+    <string name="onboarding_page3_body">查看每日连续记录、小时习惯和长期趋势。</string>
+
+    <!-- Permissions -->
+    <string name="permission_notification_rationale">开启通知权限，以便全天提醒您进行训练。</string>
+    <string name="permission_open_settings">打开设置</string>
+</resources>

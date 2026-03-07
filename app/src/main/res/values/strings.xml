@@ -1,0 +1,90 @@
+<resources>
+    <string name="app_name">Kegels</string>
+
+    <!-- Bottom navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_exercise">Exercise</string>
+    <string name="nav_stats">Statistics</string>
+    <string name="nav_settings">Settings</string>
+
+    <!-- Notification channel -->
+    <string name="notification_channel_name">Kegel Reminders</string>
+    <string name="notification_channel_desc">Reminds you to do Kegel exercises</string>
+    <string name="notification_title">Kegel Reminder</string>
+    <string name="notification_body">Time for your Kegel exercise! 💪</string>
+
+    <!-- Exercise session -->
+    <string name="exercise_contract">Contract</string>
+    <string name="exercise_relax">Relax</string>
+    <string name="exercise_start">Start</string>
+    <string name="exercise_idle_hint">Tap to begin your session</string>
+    <string name="exercise_pause">Pause</string>
+    <string name="exercise_resume">Resume</string>
+    <string name="exercise_stop">Stop</string>
+    <string name="exercise_complete">Complete!</string>
+    <string name="exercise_stop_dialog_title">End Session?</string>
+    <string name="exercise_stop_dialog_body">End session early? Your progress will still be saved.</string>
+    <string name="exercise_stop_dialog_confirm">End</string>
+    <string name="exercise_stop_dialog_cancel">Continue</string>
+    <string name="session_duration_fmt">Session: %1$d min %2$d sec</string>
+    <string name="session_count_fmt">%1$d / %2$d</string>
+
+    <!-- Completion screen -->
+    <string name="completion_title">Great work!</string>
+    <string name="completion_kegels">Kegels completed</string>
+    <string name="completion_duration">Duration</string>
+    <string name="completion_done">Done</string>
+
+    <!-- Statistics -->
+    <string name="stats_heatmap">Calendar</string>
+    <string name="stats_hourly">Hourly</string>
+    <string name="stats_weekly">Weekly</string>
+    <string name="stats_today">Today</string>
+    <string name="stats_this_week">This Week</string>
+    <string name="stats_all_time">All Time</string>
+    <string name="stats_streak">Streak 🔥</string>
+    <string name="stats_days_suffix">days</string>
+    <string name="stats_no_data">No data yet</string>
+
+    <!-- Settings -->
+    <string name="settings_exercise">Exercise Settings</string>
+    <string name="settings_kegels_per_minute">Kegels per Minute</string>
+    <string name="settings_total_kegels">Total Kegels per Session</string>
+    <string name="settings_interval">Reminder Interval</string>
+    <string name="settings_interval_30min">Every 30 minutes</string>
+    <string name="settings_interval_1hr">Every 1 hour</string>
+    <string name="settings_interval_2hr">Every 2 hours</string>
+    <string name="settings_interval_custom">Custom</string>
+    <string name="settings_interval_custom_hint">Minutes (15–480)</string>
+    <string name="settings_night_mode">Do Not Disturb</string>
+    <string name="settings_night_from">From</string>
+    <string name="settings_night_to">To</string>
+    <string name="settings_language">Language</string>
+    <string name="settings_language_system">System</string>
+    <string name="settings_save">Save</string>
+    <string name="settings_saved">Settings saved</string>
+    <string name="settings_error_range">Value out of range</string>
+
+    <!-- Home screen -->
+    <string name="home_greeting_morning">Good morning!</string>
+    <string name="home_greeting_afternoon">Good afternoon!</string>
+    <string name="home_greeting_evening">Good evening!</string>
+    <string name="home_start_exercise">Start Exercise</string>
+    <string name="home_today_count">Today\'s kegels</string>
+    <string name="home_next_reminder">Next reminder</string>
+    <string name="home_no_reminder">No reminder set</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_skip">Skip</string>
+    <string name="onboarding_get_started">Get Started</string>
+    <string name="onboarding_page1_title">Smart Reminders</string>
+    <string name="onboarding_page1_body">Set your preferred interval and we\'ll remind you throughout the day — silently at night.</string>
+    <string name="onboarding_page2_title">Guided Sessions</string>
+    <string name="onboarding_page2_body">Follow the animated breathing guide to pace your exercises perfectly.</string>
+    <string name="onboarding_page3_title">Track Progress</string>
+    <string name="onboarding_page3_body">View your daily streaks, hourly habits, and long-term trends.</string>
+
+    <!-- Permissions -->
+    <string name="permission_notification_rationale">Enable notifications so we can remind you to exercise throughout the day.</string>
+    <string name="permission_open_settings">Open Settings</string>
+</resources>

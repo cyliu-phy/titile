@@ -1,0 +1,93 @@
+package cc.cyliu.kegels.ui.stats
+
+import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.layout.Box
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.drawText
+import androidx.compose.ui.text.rememberTextMeasurer
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import cc.cyliu.kegels.R
+import cc.cyliu.kegels.data.db.DailyTotal
+
+@Composable
+fun WeeklyChart(
+    weeklyTotals: List<DailyTotal>,
+    modifier: Modifier = Modifier
+) {
+    if (weeklyTotals.isEmpty()) {
+        Box(modifier = modifier, contentAlignment = Alignment.Center) {
+            Text(
+                text = stringResource(R.string.stats_no_data),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        }
+        return
+    }
+
+    val barColor = MaterialTheme.colorScheme.primary
+    val gridColor = MaterialTheme.colorScheme.outlineVariant
+    val axisColor = MaterialTheme.colorScheme.outline
+    val labelColor = MaterialTheme.colorScheme.onSurfaceVariant
+    val textMeasurer = rememberTextMeasurer()
+
+    Canvas(modifier = modifier) {
+        val yLabelWidth = 32.dp.toPx()
+        val xLabelHeight = 20.dp.toPx()
+        val topPad = 20.dp.toPx() // room for count labels above bars
+
+        val chartLeft = yLabelWidth
+        val chartRight = size.width
+        val chartTop = topPad
+        val chartBottom = size.height - xLabelHeight
+        val chartWidth = chartRight - chartLeft
+        val chartHeight = chartBottom - chartTop
+
+        val maxVal = weeklyTotals.maxOf { it.total }.coerceAtLeast(1)
+        val n = weeklyTotals.size
+        val slotW = chartWidth / n
+        val barW = 22.dp.toPx()
+
+        // Y-axis grid lines at 0, 50%, 100%
+        listOf(0, maxVal / 2, maxVal).forEach { value ->
+            val y = chartBottom - (value.toFloat() / maxVal) * chartHeight
+            drawLine(color = gridColor, start = Offset(chartLeft, y), end = Offset(chartRight, y), strokeWidth = 1.dp.toPx())
+            val r = textMeasurer.measure(value.toString(), TextStyle(fontSize = 10.sp, color = labelColor))
+            drawText(r, topLeft = Offset(0f, y - r.size.height / 2f))
+        }
+
+        // X-axis baseline
+        drawLine(color = axisColor, start = Offset(chartLeft, chartBottom), end = Offset(chartRight, chartBottom), strokeWidth = 1.dp.toPx())
+
+        weeklyTotals.forEachIndexed { i, entry ->
+            val slotLeft = chartLeft + i * slotW
+            val barLeft = slotLeft + (slotW - barW) / 2f
+            val barH = (entry.total.toFloat() / maxVal) * chartHeight
+            val barTop = chartBottom - barH
+
+            // Bar
+            drawRect(color = barColor, topLeft = Offset(barLeft, barTop), size = Size(barW, barH))
+
+            // Count above bar
+            if (entry.total > 0) {
+                val cr = textMeasurer.measure(entry.total.toString(), TextStyle(fontSize = 11.sp, color = barColor))
+                val cx = (slotLeft + slotW / 2f - cr.size.width / 2f).coerceIn(chartLeft, chartRight - cr.size.width)
+                drawText(cr, topLeft = Offset(cx, barTop - cr.size.height - 2.dp.toPx()))
+            }
+
+            // X label (MM-DD)
+            val lr = textMeasurer.measure(entry.date.substring(5), TextStyle(fontSize = 10.sp, color = labelColor))
+            val lx = (slotLeft + slotW / 2f - lr.size.width / 2f).coerceIn(chartLeft, chartRight - lr.size.width)
+            drawText(lr, topLeft = Offset(lx, chartBottom + (xLabelHeight - lr.size.height) / 2f))
+        }
+    }
+}
