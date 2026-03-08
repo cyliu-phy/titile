@@ -27,4 +27,5 @@ object NotificationPreferences {
 object AppPreferences {
     val ONBOARDING_COMPLETE = booleanPreferencesKey("onboarding_complete")
     val LANGUAGE_TAG = stringPreferencesKey("language_tag")
+    val ACKNOWLEDGED_MILESTONES = stringPreferencesKey("acknowledged_milestones")
 }

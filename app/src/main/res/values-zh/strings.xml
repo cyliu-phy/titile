@@ -3,7 +3,7 @@
 
     <!-- Bottom navigation -->
     <string name="nav_home">主页</string>
-    <string name="nav_exercise">训练</string>
+    <string name="nav_exercise">提肛</string>
     <string name="nav_stats">统计</string>
     <string name="nav_settings">设置</string>
 
@@ -17,13 +17,13 @@
     <string name="exercise_contract">收缩</string>
     <string name="exercise_relax">放松</string>
     <string name="exercise_start">开始</string>
-    <string name="exercise_idle_hint">点击开始训练</string>
+    <string name="exercise_idle_hint">点击开始提肛</string>
     <string name="exercise_pause">暂停</string>
     <string name="exercise_resume">继续</string>
     <string name="exercise_stop">停止</string>
     <string name="exercise_complete">完成！</string>
     <string name="exercise_stop_dialog_title">提前结束？</string>
-    <string name="exercise_stop_dialog_body">提前结束训练？已完成的进度将被保存。</string>
+    <string name="exercise_stop_dialog_body">提前结束提肛？已完成的进度将被保存。</string>
     <string name="exercise_stop_dialog_confirm">结束</string>
     <string name="exercise_stop_dialog_cancel">继续</string>
     <string name="session_duration_fmt">训练时长：%1$d 分 %2$d 秒</string>
@@ -45,6 +45,19 @@
     <string name="stats_streak">连续天数 🔥</string>
     <string name="stats_days_suffix">天</string>
     <string name="stats_no_data">暂无数据</string>
+    <string name="stats_medals">成就</string>
+    <string name="medal_starter">初学者</string>
+    <string name="medal_motivated">积极者</string>
+    <string name="medal_consistent">坚持者</string>
+    <string name="medal_dedicated">专注者</string>
+    <string name="medal_expert">专家</string>
+    <string name="medal_master">大师</string>
+    <string name="medal_champion">冠军</string>
+    <string name="medal_legend">传奇</string>
+    <string name="medal_immortal">不朽</string>
+    <string name="medal_congrats_title">成就解锁！</string>
+    <string name="medal_congrats_body">你已完成 %1$s 次凯格尔运动！</string>
+    <string name="medal_congrats_ok">太棒了！</string>
 
     <!-- Settings -->
     <string name="settings_exercise">训练设置</string>

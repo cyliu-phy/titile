@@ -45,6 +45,19 @@
     <string name="stats_streak">Streak 🔥</string>
     <string name="stats_days_suffix">days</string>
     <string name="stats_no_data">No data yet</string>
+    <string name="stats_medals">Achievements</string>
+    <string name="medal_starter">Starter</string>
+    <string name="medal_motivated">Motivated</string>
+    <string name="medal_consistent">Consistent</string>
+    <string name="medal_dedicated">Dedicated</string>
+    <string name="medal_expert">Expert</string>
+    <string name="medal_master">Master</string>
+    <string name="medal_champion">Champion</string>
+    <string name="medal_legend">Legend</string>
+    <string name="medal_immortal">Immortal</string>
+    <string name="medal_congrats_title">Achievement Unlocked!</string>
+    <string name="medal_congrats_body">You\'ve completed %1$s kegels!</string>
+    <string name="medal_congrats_ok">Awesome!</string>
 
     <!-- Settings -->
     <string name="settings_exercise">Exercise Settings</string>
