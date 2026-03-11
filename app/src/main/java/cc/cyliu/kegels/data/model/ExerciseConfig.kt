@@ -1,7 +1,7 @@
 package cc.cyliu.kegels.data.model
 
 data class ExerciseConfig(
-    val kegelsPerMinute: Int = 60,
+    val kegelsPerMinute: Int = 25,
     val totalKegels: Int = 100
 ) {
     val intervalMs: Long get() = 60_000L / kegelsPerMinute

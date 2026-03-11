@@ -1,7 +1,11 @@
 package cc.cyliu.kegels.ui.settings
 
+import android.app.Activity
 import android.app.LocaleManager
+import android.content.res.Configuration
+import android.os.Build
 import android.os.LocaleList
+import java.util.Locale
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -304,11 +308,31 @@ fun SettingsScreen(viewModel: SettingsViewModel = hiltViewModel()) {
                             .background(if (isSelected) selectedBg else MaterialTheme.colorScheme.surface)
                             .clickable {
                                 viewModel.saveLanguage(tag)
-                                val localeManager = context.getSystemService(LocaleManager::class.java)
-                                localeManager.applicationLocales = if (tag == "system") {
-                                    LocaleList.getEmptyLocaleList()
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                                    val localeManager = context.getSystemService(LocaleManager::class.java)
+                                    localeManager.applicationLocales = if (tag == "system") {
+                                        LocaleList.getEmptyLocaleList()
+                                    } else {
+                                        LocaleList.forLanguageTags(tag)
+                                    }
                                 } else {
-                                    LocaleList.forLanguageTags(tag)
+                                    if (tag == "system") {
+                                        // Use the real device locale from the unmodified system
+                                        // Resources — NOT Locale.getDefault() which may have been
+                                        // overridden by a previous language selection this session.
+                                        val systemLocale = android.content.res.Resources
+                                            .getSystem().configuration.locales[0]
+                                        Locale.setDefault(systemLocale)
+                                    } else {
+                                        val locale = Locale.forLanguageTag(tag)
+                                        Locale.setDefault(locale)
+                                        @Suppress("DEPRECATION")
+                                        val cfg = Configuration(context.resources.configuration)
+                                        cfg.setLocale(locale)
+                                        @Suppress("DEPRECATION")
+                                        context.resources.updateConfiguration(cfg, context.resources.displayMetrics)
+                                    }
+                                    (context as? Activity)?.recreate()
                                 }
                             },
                         contentAlignment = Alignment.Center

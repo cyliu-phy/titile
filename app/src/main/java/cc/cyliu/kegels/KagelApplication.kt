@@ -4,7 +4,9 @@ import android.app.Application
 import android.app.LocaleManager
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.os.Build
 import android.os.LocaleList
+import java.util.Locale
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.hilt.work.HiltWorkerFactory
@@ -45,8 +47,18 @@ class KagelApplication : Application(), Configuration.Provider {
             dataStore.data.first()[AppPreferences.LANGUAGE_TAG]
         } ?: return
         if (tag == "system") return
-        getSystemService(LocaleManager::class.java)
-            .applicationLocales = LocaleList.forLanguageTags(tag)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            getSystemService(LocaleManager::class.java)
+                .applicationLocales = LocaleList.forLanguageTags(tag)
+        } else {
+            val locale = Locale.forLanguageTag(tag)
+            Locale.setDefault(locale)
+            @Suppress("DEPRECATION")
+            val config = android.content.res.Configuration(resources.configuration)
+            config.setLocale(locale)
+            @Suppress("DEPRECATION")
+            resources.updateConfiguration(config, resources.displayMetrics)
+        }
     }
 
     private fun createNotificationChannel() {

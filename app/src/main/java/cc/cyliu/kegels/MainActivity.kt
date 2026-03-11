@@ -1,8 +1,11 @@
 package cc.cyliu.kegels
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Configuration
+import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import androidx.activity.ComponentActivity
@@ -51,12 +54,36 @@ import cc.cyliu.kegels.ui.home.HomeScreen
 import cc.cyliu.kegels.ui.onboarding.OnboardingScreen
 import cc.cyliu.kegels.ui.settings.SettingsScreen
 import cc.cyliu.kegels.ui.stats.StatsScreen
+import cc.cyliu.kegels.data.datastore.AppPreferences
+import cc.cyliu.kegels.data.datastore.dataStore
 import cc.cyliu.kegels.ui.theme.Kegels_ktTheme
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import java.util.Locale
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    // On API < 33, re-apply the saved locale every time the Activity (re)creates its context,
+    // including after recreate() is called from the language switcher.
+    override fun attachBaseContext(newBase: Context) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+            val tag = runBlocking {
+                newBase.dataStore.data.first()[AppPreferences.LANGUAGE_TAG]
+            }
+            if (tag != null && tag != "system") {
+                val locale = Locale.forLanguageTag(tag)
+                val config = Configuration(newBase.resources.configuration)
+                config.setLocale(locale)
+                super.attachBaseContext(newBase.createConfigurationContext(config))
+                return
+            }
+        }
+        super.attachBaseContext(newBase)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()

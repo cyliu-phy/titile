@@ -16,7 +16,7 @@ class ExerciseConfigRepository @Inject constructor(
 ) {
     val config: Flow<ExerciseConfig> = dataStore.data.map { prefs ->
         ExerciseConfig(
-            kegelsPerMinute = prefs[ExercisePreferences.KEGELS_PER_MINUTE] ?: 60,
+            kegelsPerMinute = prefs[ExercisePreferences.KEGELS_PER_MINUTE] ?: 25,
             totalKegels = prefs[ExercisePreferences.TOTAL_KEGELS] ?: 100
         )
     }
