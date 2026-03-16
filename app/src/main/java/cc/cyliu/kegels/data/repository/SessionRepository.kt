@@ -50,4 +50,8 @@ class SessionRepository @Inject constructor(
 
     fun getAllTimeTotal(): Flow<Int?> =
         sessionDao.getAllTimeTotal()
+
+    suspend fun getAllSessions(): List<SessionEntity> = sessionDao.getAllSessions()
+
+    suspend fun insertAll(sessions: List<SessionEntity>) = sessionDao.insertAll(sessions)
 }

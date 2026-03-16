@@ -97,6 +97,15 @@
     <string name="onboarding_page3_title">追踪进度</string>
     <string name="onboarding_page3_body">查看每日连续记录、小时习惯和长期趋势。</string>
 
+    <!-- Data management -->
+    <string name="settings_data">数据管理</string>
+    <string name="data_export_csv">导出为 CSV</string>
+    <string name="data_backup">备份数据</string>
+    <string name="data_restore">从备份恢复</string>
+    <string name="data_exported_fmt">已导出 {n} 条记录</string>
+    <string name="data_imported_fmt">已导入 {n} 条记录</string>
+    <string name="data_operation_failed">操作失败，请重试。</string>
+
     <!-- Permissions -->
     <string name="permission_notification_rationale">开启通知权限，以便全天提醒您进行训练。</string>
     <string name="permission_open_settings">打开设置</string>

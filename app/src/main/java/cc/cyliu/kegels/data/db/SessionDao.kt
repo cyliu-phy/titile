@@ -2,6 +2,7 @@ package cc.cyliu.kegels.data.db
 
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
 
@@ -43,4 +44,10 @@ interface SessionDao {
 
     @Query("SELECT SUM(completedCount) FROM sessions")
     fun getAllTimeTotal(): Flow<Int?>
+
+    @Query("SELECT * FROM sessions ORDER BY startTime ASC")
+    suspend fun getAllSessions(): List<SessionEntity>
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertAll(sessions: List<SessionEntity>)
 }

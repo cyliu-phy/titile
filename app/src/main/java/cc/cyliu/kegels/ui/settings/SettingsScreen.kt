@@ -6,6 +6,8 @@ import android.content.res.Configuration
 import android.os.Build
 import android.os.LocaleList
 import java.util.Locale
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -30,6 +32,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
@@ -61,6 +64,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cc.cyliu.kegels.R
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import kotlin.math.roundToInt
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -70,9 +75,22 @@ fun SettingsScreen(viewModel: SettingsViewModel = hiltViewModel()) {
     val notifSettings by viewModel.notificationSettings.collectAsStateWithLifecycle()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val currentLanguage by viewModel.currentLanguage.collectAsStateWithLifecycle()
+    val backupUiState by viewModel.backupUiState.collectAsStateWithLifecycle()
     val context = LocalContext.current
 
     val snackbarHostState = remember { SnackbarHostState() }
+
+    // File picker launchers
+    val today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"))
+    val exportCsvLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.CreateDocument("text/csv")
+    ) { uri -> uri?.let { viewModel.exportCsv(it) } }
+    val exportBackupLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.CreateDocument("application/json")
+    ) { uri -> uri?.let { viewModel.exportBackup(it) } }
+    val importBackupLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.OpenDocument()
+    ) { uri -> uri?.let { viewModel.importBackup(it) } }
 
     var kpm by rememberSaveable(config.kegelsPerMinute) { mutableIntStateOf(config.kegelsPerMinute) }
     var total by rememberSaveable(config.totalKegels) { mutableIntStateOf(config.totalKegels) }
@@ -92,10 +110,30 @@ fun SettingsScreen(viewModel: SettingsViewModel = hiltViewModel()) {
 
     val savedMsg = stringResource(R.string.settings_saved)
     val errorMsg = stringResource(R.string.settings_error_range)
+    val backupFailMsg = stringResource(R.string.data_operation_failed)
+    val exportedMsg = stringResource(R.string.data_exported_fmt)
+    val importedMsg = stringResource(R.string.data_imported_fmt)
     LaunchedEffect(uiState) {
         when (uiState) {
             is SettingsUiState.Saved -> { snackbarHostState.showSnackbar(savedMsg); viewModel.clearUiState() }
             is SettingsUiState.Error -> { snackbarHostState.showSnackbar(errorMsg); viewModel.clearUiState() }
+            else -> {}
+        }
+    }
+    LaunchedEffect(backupUiState) {
+        when (val state = backupUiState) {
+            is BackupUiState.Success -> {
+                val msg = if (state.isImport)
+                    importedMsg.replace("{n}", state.count.toString())
+                else
+                    exportedMsg.replace("{n}", state.count.toString())
+                snackbarHostState.showSnackbar(msg)
+                viewModel.clearBackupUiState()
+            }
+            is BackupUiState.Failure -> {
+                snackbarHostState.showSnackbar(backupFailMsg)
+                viewModel.clearBackupUiState()
+            }
             else -> {}
         }
     }
@@ -346,6 +384,37 @@ fun SettingsScreen(viewModel: SettingsViewModel = hiltViewModel()) {
                         )
                     }
                 }
+            }
+
+            Spacer(Modifier.height(16.dp))
+            HorizontalDivider()
+            Spacer(Modifier.height(12.dp))
+
+            // ── Data Management ────────────────────────────────────────────
+            Text(stringResource(R.string.settings_data), style = MaterialTheme.typography.titleMedium)
+            Spacer(Modifier.height(8.dp))
+
+            Button(
+                onClick = { exportCsvLauncher.launch("kegels-$today.csv") },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(stringResource(R.string.data_export_csv))
+            }
+
+            Spacer(Modifier.height(4.dp))
+            Button(
+                onClick = { exportBackupLauncher.launch("kegels-backup-$today.json") },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(stringResource(R.string.data_backup))
+            }
+
+            Spacer(Modifier.height(4.dp))
+            OutlinedButton(
+                onClick = { importBackupLauncher.launch(arrayOf("application/json", "application/octet-stream", "*/*")) },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(stringResource(R.string.data_restore))
             }
 
             Spacer(Modifier.height(16.dp))

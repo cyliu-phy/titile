@@ -97,6 +97,15 @@
     <string name="onboarding_page3_title">Track Progress</string>
     <string name="onboarding_page3_body">View your daily streaks, hourly habits, and long-term trends.</string>
 
+    <!-- Data management -->
+    <string name="settings_data">Data Management</string>
+    <string name="data_export_csv">Export to CSV</string>
+    <string name="data_backup">Backup Data</string>
+    <string name="data_restore">Restore from Backup</string>
+    <string name="data_exported_fmt">{n} sessions exported</string>
+    <string name="data_imported_fmt">{n} sessions imported</string>
+    <string name="data_operation_failed">Operation failed. Please try again.</string>
+
     <!-- Permissions -->
     <string name="permission_notification_rationale">Enable notifications so we can remind you to exercise throughout the day.</string>
     <string name="permission_open_settings">Open Settings</string>
